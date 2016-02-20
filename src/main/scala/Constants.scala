@@ -23,26 +23,26 @@
   */
 object Constants {
   /** RECORD TERMINATOR */
-  val RT: Int = 0x001D;
+  val RT: Int = 0x001D
 
   /** FIELD TERMINATOR */
-  val FT: Int = 0x001E;
+  val FT: Int = 0x001E
 
   /** SUBFIELD DELIMITER */
-  val US: Int = 0x001F;
+  val US: Int = 0x001F
 
   /** BLANK */
-  val BLANK: Int = 0x0020;
+  val BLANK: Int = 0x0020
 
   /** NS URI */
-  val MARCXML_NS_URI: String = "http://www.loc.gov/MARC21/slim";
+  val MARCXML_NS_URI: String = "http://www.loc.gov/MARC21/slim"
 
   /** MARC-8 ANSEL ENCODING **/
-  val MARC_8_ENCODING: String = "MARC8";
+  val MARC_8_ENCODING: String = "MARC8"
 
   /** ISO5426 ENCODING **/
-  val ISO5426_ENCODING: String = "ISO5426";
+  val ISO5426_ENCODING: String = "ISO5426"
 
   /** ISO6937 ENCODING **/
-  val ISO6937_ENCODING: String = "ISO6937";
+  val ISO6937_ENCODING: String = "ISO6937"
 }
