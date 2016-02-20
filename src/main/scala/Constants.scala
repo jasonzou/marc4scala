@@ -23,16 +23,16 @@
   */
 object Constants {
   /** RECORD TERMINATOR */
-  val RT: Int = 0x001D
+  val RecordTerminator: Byte = 0x001D
 
   /** FIELD TERMINATOR */
-  val FT: Int = 0x001E
+  val FieldTerminator: Byte = 0x001E
 
   /** SUBFIELD DELIMITER */
-  val US: Int = 0x001F
+  val SubfieldDelimiter: Byte = 0x001F
 
   /** BLANK */
-  val BLANK: Int = 0x0020
+  val BlankSpace: Byte = 0x0020
 
   /** NS URI */
   val MARCXML_NS_URI: String = "http://www.loc.gov/MARC21/slim"
@@ -45,4 +45,7 @@ object Constants {
 
   /** ISO6937 ENCODING **/
   val ISO6937_ENCODING: String = "ISO6937"
+
+  val DirectoryEntryLength: Int = 12
+  val LeaderLength: Int = 24
 }
