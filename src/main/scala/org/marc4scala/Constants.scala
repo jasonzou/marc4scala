@@ -1,3 +1,5 @@
+package org.marc4scala
+
 /*
  * Copyright (c) 2016. <jason.zou@gmail.com>
  *
@@ -23,16 +25,16 @@
   */
 object Constants {
   /** RECORD TERMINATOR */
-  val RecordTerminator: Byte = 0x001D
+  val RecordTerminator: Byte = 0x1D
 
   /** FIELD TERMINATOR */
-  val FieldTerminator: Byte = 0x001E
+  val FieldTerminator: Byte = 0x1E
 
   /** SUBFIELD DELIMITER */
-  val SubfieldDelimiter: Byte = 0x001F
+  val SubfieldDelimiter: Byte = 0x1F
 
   /** BLANK */
-  val BlankSpace: Byte = 0x0020
+  val BlankSpace: Byte = 0x20
 
   /** NS URI */
   val MARCXML_NS_URI: String = "http://www.loc.gov/MARC21/slim"
@@ -46,6 +48,6 @@ object Constants {
   /** ISO6937 ENCODING **/
   val ISO6937_ENCODING: String = "ISO6937"
 
-  val DirectoryEntryLength: Int = 12
-  val LeaderLength: Int = 24
+  val DirectoryEntryLength: Short = 12
+  val LeaderLength: Short = 24
 }
