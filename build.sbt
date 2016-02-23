@@ -1,3 +1,5 @@
+import scala.collection.JavaConverters._
+
 name := "marc4scala"
 
 version := "1.0.1"
@@ -14,6 +16,6 @@ publishArtifact in (Compile, packageDoc) := false
 libraryDependencies ++= Seq(
   "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
   "org.apache.logging.log4j" % "log4j-core" % "2.0-beta8" % "test, runtime",
-  "org.scalatest" %% "scalatest" % "2.1.3" % "test",
-  "org.scalacheck" %% "scalacheck" % "1.11.3" % "test"
+  "org.scalactic" %% "scalactic" % "2.2.6",
+  "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 )
