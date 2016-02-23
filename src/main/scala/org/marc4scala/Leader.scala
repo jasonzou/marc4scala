@@ -4,16 +4,16 @@ package org.marc4scala
   * Created by jason on 2/22/16.
   */
 class Leader {
-  private var recordLength: Short = 0
-  private var recordStatus: Byte = 0
-  private var typeOfRecord: Byte = 0
-  private var implDefined1: Array[Byte] = new Array[Byte](2)
-  private var charCodingScheme: Byte = 0
-  private var indicatorCount: Short = 0
-  private var subfieldCodeLength: Short = 0
-  private var baseAddressOfData: Array[Byte] = new Array[Byte](5)
-  private var implDefined2: Array[Byte] = new Array[Byte](2)
-  private var entryMap: Array[Byte] = new Array[Byte](Constants.LeaderLength)
+  private var _recordLength: Int = 0
+  private var _recordStatus: Byte = 0
+  private var _typeOfRecord: Byte = 0
+  private var _implDefined1: Array[Byte] = new Array[Byte](2)
+  private var _charCodingScheme: Byte = 0
+  private var _indicatorCount: Short = 0
+  private var _subfieldCodeLength: Short = 0
+  private var _baseAddressOfData: Array[Byte] = new Array[Byte](5)
+  private var _implDefined2: Array[Byte] = new Array[Byte](2)
+  private var _entryMap: Array[Byte] = new Array[Byte](Constants.LeaderLength)
 
   /**
     * Sets the logical record length (positions 00-04).
@@ -21,7 +21,10 @@ class Leader {
     * @param recordLength
     * integer representing the record length
     */
-  def setRecordLength(recordLength: Int)
+  def recordLength_(recordLength: Int){
+    _recordLength = recordLength
+  }
+  def recordLength = _recordLength
 
   /**
     * Sets the record status (position 05).
@@ -29,15 +32,20 @@ class Leader {
     * @param recordStatus
     * character representing the record status
     */
-  def setRecordStatus(recordStatus: Char)
+  def recordStatus_(recordStatus: Byte){
+    _recordStatus = recordStatus
+  }
+  def recordStatus = _recordStatus
 
-        /**
-          * Sets the type of record (position 06).
-          *
-          * @param typeOfRecord
-          * character representing the type of record
-          */
-  def setTypeOfRecord(typeOfRecord: Char)
+  /**
+    * Sets the type of record (position 06).
+    *
+    * @param typeOfRecord
+    * character representing the type of record
+    */
+  def typeOfRecord_(typeOfRecord: Byte){
+    _typeOfRecord = typeOfRecord
+  }
 
         /**
           * Sets implementation defined values (position 07-08).
