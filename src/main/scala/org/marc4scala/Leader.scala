@@ -55,7 +55,7 @@ class Leader {
     * @param implDefined1
     * character array representing the implementation defined data
     */
-  def implDefined1_(implDefined1: Array[Byte](2){
+  def implDefined1_(implDefined1: Array[Byte]){
     _implDefined1 = implDefined1
   }
   def implDefined1 = _implDefined1
@@ -99,7 +99,7 @@ class Leader {
      * @param baseAddressOfData
      * integer representing the base address of data
      */
-  def baseAddressOfData_(baseAddressOfData: Array[Byte](5)){
+  def baseAddressOfData_(baseAddressOfData: Array[Byte]){
     _baseAddressOfData = baseAddressOfData
   }
   def baseAddressOfData = _baseAddressOfData
@@ -110,7 +110,7 @@ class Leader {
     * @param implDefined2
     * character array representing the implementation defined data
     */
-  def implDefined2_(implDefined2: Array[Byte](2){
+  def implDefined2_(implDefined2: Array[Byte]){
     _implDefined2 = implDefined2
   }
   def implDefined2 = _implDefined2
@@ -135,15 +135,50 @@ class Leader {
     * @param ldr
     * the leader
     */
-  def unmarshal(ldr: String)
+  def unmarshal(ldr: String){
+    Array[Byte] tempLeaderArray = ldr.getBytes()
+    if (tempLeaderArray.length !== 24){
+      // warning? first 24
+    }else{       
+      try {
+        s = ldr.substring(0, 5);
+        if (isInteger(s))
+          recordLength_(Integer.parseInt(s));
+        else
+          recordLength_(0);
+        recordStatus_(tempLeaderArray(5));
+        typeOfRecord_(tempLeaderArray(6));
+        implDefined1(ldr.substring(7, 9).toCharArray());
+        charCodingScheme(ldr.charAt(9));
+        s = String.valueOf(ldr.charAt(10));
+        if (isInteger(s))
+          setIndicatorCount(Integer.parseInt(s));
+        else
+           setIndicatorCount(2);
+        s = String.valueOf(ldr.charAt(11));
+        if (isInteger(s))
+          setSubfieldCodeLength(Integer.parseInt(s));
+        else
+          setSubfieldCodeLength(2);
+        s = ldr.substring(12, 17);
+        if (isInteger(s))
+          setBaseAddressOfData(Integer.parseInt(s));
+        else
+          setBaseAddressOfData(0);
+        setImplDefined2(ldr.substring(17, 20).toCharArray());
+        setEntryMap(ldr.substring(20, 24).toCharArray());
+      } catch (NumberFormatException e) {
+         throw new RuntimeException("Unable to parse leader", e);
+      }
+    }
+  }
 
   /**
     * Creates a string object from this leader object.
     *
     * @return String - the string object from this leader object
     */
-  def marshal: String
-  def toString: String{
-    _leaderArray.toString
-  }
+  def marshal: String = new String(_leaderArray)
+  override def toString: String = new String(_leaderArray)
+
 }

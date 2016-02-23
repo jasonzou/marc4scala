@@ -51,36 +51,3 @@ object Constants {
   val DirectoryEntryLength: Short = 12
   val LeaderLength: Short = 24
 }
-/*
- try {
-            String s;
-            s = ldr.substring(0, 5);
-            if (isInteger(s))
-                setRecordLength(Integer.parseInt(s));
-            else
-                setRecordLength(0);
-            setRecordStatus(ldr.charAt(5));
-            setTypeOfRecord(ldr.charAt(6));
-            setImplDefined1(ldr.substring(7, 9).toCharArray());
-            setCharCodingScheme(ldr.charAt(9));
-            s = String.valueOf(ldr.charAt(10));
-            if (isInteger(s))
-                setIndicatorCount(Integer.parseInt(s));
-            else
-                setIndicatorCount(2);
-            s = String.valueOf(ldr.charAt(11));
-            if (isInteger(s))
-                setSubfieldCodeLength(Integer.parseInt(s));
-            else
-                setSubfieldCodeLength(2);
-            s = ldr.substring(12, 17);
-            if (isInteger(s))
-                setBaseAddressOfData(Integer.parseInt(s));
-            else
-                setBaseAddressOfData(0);
-            setImplDefined2(ldr.substring(17, 20).toCharArray());
-            setEntryMap(ldr.substring(20, 24).toCharArray());
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("Unable to parse leader", e);
-        }
-*/
