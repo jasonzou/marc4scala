@@ -1,223 +1,291 @@
-/*
- * Copyright (c) 2016. <jason.zou@gmail.com>
- *
- * This file is part of MARC4Scala.
- *
- * MARC4Scala is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * MARC4Scala is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with MARC4Scala; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-
 package org.marc4scala
 
 /**
-  * Created by jason on 2016-02-20.
+  * Created by jason on 2/22/16.
   */
 class Leader {
-
-}
-public interface Leader extends Serializable {
-
-  /**
-    * Sets the identifier.
-    *
-    * <p>
-    * The purpose of this identifier is to provide an identifier for
-    * persistency.
-    *
-    * @param id
-    *            the identifier
-    */
-  public void setId(Long id);
-
-  /**
-    * Returns the identifier.
-    *
-    * @return Long - the identifier
-    */
-  public Long getId();
+  private var recordLength: Short = 0
+  private var recordStatus: Byte = 0
+  private var typeOfRecord: Byte = 0
+  private var implDefined1: Array[Byte] = new Array[Byte](2)
+  private var charCodingScheme: Byte = 0
+  private var indicatorCount: Short = 0
+  private var subfieldCodeLength: Short = 0
+  private var baseAddressOfData: Array[Byte] = new Array[Byte](5)
+  private var implDefined2: Array[Byte] = new Array[Byte](2)
+  private var entryMap: Array[Byte] = new Array[Byte](Constants.LeaderLength)
 
   /**
     * Sets the logical record length (positions 00-04).
     *
     * @param recordLength
-    *            integer representing the record length
+    * integer representing the record length
     */
-  public void setRecordLength(int recordLength);
+  def setRecordLength(recordLength: Int)
 
   /**
     * Sets the record status (position 05).
     *
     * @param recordStatus
-    *            character representing the record status
+    * character representing the record status
     */
-  public void setRecordStatus(char recordStatus);
+  def setRecordStatus(recordStatus: Char)
 
-  /**
-    * Sets the type of record (position 06).
-    *
-    * @param typeOfRecord
-    *            character representing the type of record
-    */
-  public void setTypeOfRecord(char typeOfRecord);
+        /**
+          * Sets the type of record (position 06).
+          *
+          * @param typeOfRecord
+          * character representing the type of record
+          */
+  def setTypeOfRecord(typeOfRecord: Char)
 
-  /**
-    * Sets implementation defined values (position 07-08).
-    *
-    * @param implDefined1
-    *            character array representing the implementation defined data
-    */
-  public void setImplDefined1(char[] implDefined1);
+        /**
+          * Sets implementation defined values (position 07-08).
+          *
+          * @param implDefined1
+          * character array representing the implementation defined data
+          */
+  def setImplDefined1(implDefined1: Array[Char])
 
-  /**
-    * Sets the character encoding scheme (position 09).
-    *
-    * @param charCodingScheme
-    *            character representing the character encoding
-    */
-  public void setCharCodingScheme(char charCodingScheme);
+        /**
+          * Sets the character encoding scheme (position 09).
+          *
+          * @param charCodingScheme
+          * character representing the character encoding
+          */
+  def setCharCodingScheme(charCodingScheme: Char)
 
-  /**
-    * Sets the indicator count (position 10).
-    *
-    * @param indicatorCount
-    *            integer representing the number of indicators present in a
-    *            data field
-    */
-  public void setIndicatorCount(int indicatorCount);
+        /**
+          * Sets the indicator count (position 10).
+          *
+          * @param indicatorCount
+          * integer representing the number of indicators present in a
+          * data field
+          */
+  def setIndicatorCount(indicatorCount: Int)
 
-  /**
-    * Sets the subfield code length (position 11).
-    *
-    * @param subfieldCodeLength
-    *            integer representing the subfield code length
-    */
-  public void setSubfieldCodeLength(int subfieldCodeLength);
+        /**
+          * Sets the subfield code length (position 11).
+          *
+          * @param subfieldCodeLength
+          * integer representing the subfield code length
+          */
+  def setSubfieldCodeLength(subfieldCodeLength: Int)
 
-  /**
-    * Sets the base address of data (positions 12-16).
-    *
-    * @param baseAddressOfData
-    *            integer representing the base address of data
-    */
-  public void setBaseAddressOfData(int baseAddressOfData);
+        /**
+          * Sets the base address of data (positions 12-16).
+          *
+          * @param baseAddressOfData
+          * integer representing the base address of data
+          */
+  def setBaseAddressOfData(baseAddressOfData: Int)
 
-  /**
-    * Sets implementation defined values (positions 17-19).
-    *
-    * @param implDefined2
-    *            character array representing the implementation defined data
-    */
-  public void setImplDefined2(char[] implDefined2);
+        /**
+          * Sets implementation defined values (positions 17-19).
+          *
+          * @param implDefined2
+          * character array representing the implementation defined data
+          */
+  def setImplDefined2(implDefined2: Array[Char])
 
-  /**
-    * Sets the entry map (positions 20-23).
-    *
-    * @param entryMap
-    *            character array representing the entry map
-    */
-  public void setEntryMap(char[] entryMap);
+        /**
+          * Sets the entry map (positions 20-23).
+          *
+          * @param entryMap
+          * character array representing the entry map
+          */
+  def setEntryMap(entryMap: Array[Char])
 
-  /**
-    * Returns the logical record length (positions 00-04).
-    *
-    * @return <code>int</code>- the record length
-    */
-  public int getRecordLength();
+        /**
+          * Returns the logical record length (positions 00-04).
+          *
+          * @return <code>int</code>- the record length
+          */
+  def getRecordLength: Int
 
-  /**
-    * Returns the record status (positions 05).
-    *
-    * @return <code>char</code>- the record status
-    */
-  public char getRecordStatus();
+        /**
+          * Returns the record status (positions 05).
+          *
+          * @return <code>char</code>- the record status
+          */
+  def getRecordStatus: Char
 
-  /**
-    * Returns the record type (position 06).
-    *
-    * @return <code>char</code>- the record type
-    */
-  public char getTypeOfRecord();
+        /**
+          * Returns the record type (position 06).
+          *
+          * @return <code>char</code>- the record type
+          */
+  def getTypeOfRecord: Char
 
-  /**
-    * Returns implementation defined values (positions 07-08).
-    *
-    * @return <code>char[]</code>- implementation defined values
-    */
-  public char[] getImplDefined1();
+        /**
+          * Returns implementation defined values (positions 07-08).
+          *
+          * @return <code>char[]</code>- implementation defined values
+          */
+  def getImplDefined1: Array[Char]
 
-  /**
-    * Returns the character coding scheme (position 09).
-    *
-    * @return <code>char</code>- the character coding scheme
-    */
-  public char getCharCodingScheme();
+        /**
+          * Returns the character coding scheme (position 09).
+          *
+          * @return <code>char</code>- the character coding scheme
+          */
+  def getCharCodingScheme: Char
 
-  /**
-    * Returns the indicator count (positions 10).
-    *
-    * @return <code>int</code>- the indicator count
-    */
-  public int getIndicatorCount();
+        /**
+          * Returns the indicator count (positions 10).
+          *
+          * @return <code>int</code>- the indicator count
+          */
+  def getIndicatorCount: Int
 
-  /**
-    * Returns the subfield code length (position 11).
-    *
-    * @return <code>int</code>- the subfield code length
-    */
-  public int getSubfieldCodeLength();
+        /**
+          * Returns the subfield code length (position 11).
+          *
+          * @return <code>int</code>- the subfield code length
+          */
+  def getSubfieldCodeLength: Int
 
-  /**
-    * Returns the base address of data (positions 12-16).
-    *
-    * @return <code>int</code>- the base address of data
-    */
-  public int getBaseAddressOfData();
+        /**
+          * Returns the base address of data (positions 12-16).
+          *
+          * @return <code>int</code>- the base address of data
+          */
+  def getBaseAddressOfData: Int
 
-  /**
-    * Returns implementation defined values (positions 17-19).
-    *
-    * @return <code>char[]</code>- implementation defined values
-    */
-  public char[] getImplDefined2();
+        /**
+          * Returns implementation defined values (positions 17-19).
+          *
+          * @return <code>char[]</code>- implementation defined values
+          */
+  def getImplDefined2: Array[Char]
+        /**
+          * Returns the entry map (positions 20-23).
+          *
+          * @return <code>char[]</code>- the entry map
+          */
+  def getEntryMap: Array[Char]
 
-  /**
-    * Returns the entry map (positions 20-23).
-    *
-    * @return <code>char[]</code>- the entry map
-    */
-  public char[] getEntryMap();
+        /**
+          * Creates a leader object from a string object.
+          *
+          * Indicator count and subfield code length are defaulted to 2 if they are
+          * not integer values.
+          *
+          * @param ldr
+          * the leader
+          */
+  def unmarshal(ldr: String)
 
-  /**
-    * <p>
-    * Creates a leader object from a string object.
-    * </p>
-    *
-    * <p>
-    * Indicator count and subfield code length are defaulted to 2 if they are
-    * not integer values.
-    * </p>
-    *
-    * @param ldr
-    *            the leader
-    */
-  public void unmarshal(String ldr);
+        /**
+          * Creates a string object from this leader object.
+          *
+          * @return String - the string object from this leader object
+          */
+  def marshal: String
+  """
 
-  /**
-    * Creates a string object from this leader object.
-    *
-    * @return String - the string object from this leader object
-    */
-  public String marshal();
+  int _recordLength;
+  char _recordStatus;
+  char _recordType;
+  char _charCodingScheme;
+  char _indicatorCount;
+  char _subfieldCodeLength;
+  int _baseAddressOfData;
+  char[] _buff = new char[MARCChar.LEADER_LEN];
+  string _warn = "";
 
+  public MARCLeader(int recLen, int baseAddress)
+  {
+    _recordLength = recLen;
+    _baseAddressOfData = baseAddress;
+
+    for (int i = 0; i < MARCChar.LEADER_LEN; i++)
+    {
+      _buff[i] = MARCChar.SPACE;
+    }
+
+    String temp = String.Format("{0:00000}", recLen);
+    temp.CopyTo(0, _buff, 0, 5);
+
+    temp = String.Format("{0:00000}", baseAddress);
+    temp.CopyTo(0, _buff, 12, 5);
+
+    _buff[10] = '2';
+    _buff[11] = '2';
+    _buff[20] = '4';
+    _buff[21] = '5';
+    _buff[22] = '0';
+    _buff[23] = '0';
+
+  }
+
+  public MARCLeader(char[] leader)
+  {
+
+    char[] buff = new char[5];
+
+    Array.Copy(leader, 0, buff, 0, 5);
+    _recordLength = getNum(buff);
+
+    Array.Copy(leader, 12, buff, 0, 5);
+    _baseAddressOfData = getNum(buff);
+    Array.Copy(leader, _buff, MARCChar.LEADER_LEN);
+
+    if (_baseAddressOfData >= _recordLength)
+    {
+      _warn = "Invalid Leader";
+    }
+
+  }
+
+  public void update(int length, int baseAddress)
+  {
+    setRecLength(length);
+    setBaseAddressOfData(baseAddress);
+  }
+
+  private int getNum(char[] charArray)
+  {
+    int len = charArray.Length;
+    int retNum = 0; ;
+
+    for (int i = 0; i < len; i++)
+    {
+      int temp = (int)(charArray[i] - '0') * (int)Math.Pow(10, (len - i - 1));
+      retNum += temp;
+    }
+    return retNum;
+  }
+
+  public char[] asRaw()
+  {
+    return _buff;
+  }
+
+  public int getRecLength()
+  {
+    return _recordLength;
+  }
+
+  private void setRecLength(int length)
+  {
+    _recordLength = length;
+
+    String temp = String.Format("{0:00000}", length);
+    temp.CopyTo(0, _buff, 0, 5);
+  }
+
+  public int getBaseAddressOfData()
+  {
+    return _baseAddressOfData;
+  }
+
+  private void setBaseAddressOfData(int baseAddress)
+  {
+    _baseAddressOfData = baseAddress;
+
+    String temp = String.Format("{0:00000}", baseAddress);
+    temp.CopyTo(0, _buff, 12, 5);
+  }
+  """
 }
