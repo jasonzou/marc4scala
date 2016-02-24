@@ -59,7 +59,7 @@ class Leader {
     _implDefined1 = implDefined1
   }
   def implDefined1 = _implDefined1
-  
+
   /**
     * Sets the character encoding scheme (position 09).
     * @param charCodingScheme
@@ -92,7 +92,6 @@ class Leader {
     _subfieldCodeLength = subfieldCodeLength
   }
   def subfieldCodeLength = _subfieldCodeLength
-  
    /**
      * Sets the base address of data (positions 12-16).
      *
@@ -103,7 +102,6 @@ class Leader {
     _baseAddressOfData = baseAddressOfData
   }
   def baseAddressOfData = _baseAddressOfData
-  
   /**
     * Sets implementation defined values (positions 17-19).
     *
@@ -125,7 +123,6 @@ class Leader {
     _entryMap = entryMap
   }
   def entryMap = _entryMap
-       
   /**
     * Creates a leader object from a string object.
     *
@@ -139,7 +136,7 @@ class Leader {
     Array[Byte] tempLeaderArray = ldr.getBytes()
     if (tempLeaderArray.length !== 24){
       // warning? first 24
-    }else{       
+    }else{
       try {
         s = ldr.substring(0, 5);
         if (isInteger(s))
