@@ -5,15 +5,15 @@ package org.marc4scala
   */
 class Leader {
   private var _recordLength: Int = 0
-  private var _recordStatus: Byte = 0
-  private var _typeOfRecord: Byte = 0
-  private var _implDefined1: Array[Byte] = new Array[Byte](2)
-  private var _charCodingScheme: Byte = 0
-  private var _indicatorCount: Short = 0
-  private var _subfieldCodeLength: Short = 0
-  private var _baseAddressOfData: Array[Byte] = new Array[Byte](5)
-  private var _implDefined2: Array[Byte] = new Array[Byte](3)
-  private var _entryMap: Array[Byte] = new Array[Byte](5)
+  private var _recordStatus: Char = 0
+  private var _typeOfRecord: Char = 0
+  private var _implDefined1: Array[Char] = new Array[Char](2)
+  private var _charCodingScheme: Char = 0
+  private var _indicatorCount: Int = 0
+  private var _subfieldCodeLength: Int = 0
+  private var _baseAddressOfData: Int = 0
+  private var _implDefined2: Array[Char] = new Array[Char](3)
+  private var _entryMap: Array[Char] = new Array[Char](5)
   private var _leaderArray: Array[Byte] = new Array[Byte](Constants.LeaderLength)
 
   /**
@@ -32,7 +32,7 @@ class Leader {
     * @param recordStatus
     * character representing the record status
     */
-  def recordStatus_(recordStatus: Byte){
+  def recordStatus_(recordStatus: Char){
     _recordStatus = recordStatus
   }
   def recordStatus = _recordStatus
@@ -43,7 +43,7 @@ class Leader {
     * @param typeOfRecord
     * character representing the type of record
     */
-  def typeOfRecord_(typeOfRecord: Byte){
+  def typeOfRecord_(typeOfRecord: Char){
     _typeOfRecord = typeOfRecord
   }
   def typeOfRecord = _typeOfRecord
@@ -54,7 +54,7 @@ class Leader {
     * @param implDefined1
     * character array representing the implementation defined data
     */
-  def implDefined1_(implDefined1: Array[Byte]){
+  def implDefined1_(implDefined1: Array[Char]){
     _implDefined1 = implDefined1
   }
   def implDefined1 = _implDefined1
@@ -64,7 +64,7 @@ class Leader {
     * @param charCodingScheme
     * character representing the character encoding
     */
-  def charCodingScheme_(charCodingScheme: Byte){
+  def charCodingScheme_(charCodingScheme: Char){
     _charCodingScheme = charCodingScheme
   }
   def charCodingScheme = _charCodingScheme
@@ -76,7 +76,7 @@ class Leader {
     * integer representing the number of indicators present in a
     * data field
     */
-  def indicatorCount_(indicatorCount: Byte){
+  def indicatorCount_(indicatorCount: Int){
     _indicatorCount = indicatorCount
   }
   def indicatorCount = _indicatorCount
@@ -87,7 +87,7 @@ class Leader {
     * @param subfieldCodeLength
     * integer representing the subfield code length
     */
-  def subfieldCodeLength_(subfieldCodeLength: Byte){
+  def subfieldCodeLength_(subfieldCodeLength: Int){
     _subfieldCodeLength = subfieldCodeLength
   }
   def subfieldCodeLength = _subfieldCodeLength
@@ -97,7 +97,7 @@ class Leader {
      * @param baseAddressOfData
      * integer representing the base address of data
      */
-  def baseAddressOfData_(baseAddressOfData: Array[Byte]){
+  def baseAddressOfData_(baseAddressOfData: Int){
     _baseAddressOfData = baseAddressOfData
   }
   def baseAddressOfData = _baseAddressOfData
@@ -107,7 +107,7 @@ class Leader {
     * @param implDefined2
     * character array representing the implementation defined data
     */
-  def implDefined2_(implDefined2: Array[Byte]){
+  def implDefined2_(implDefined2: Array[Char]){
     _implDefined2 = implDefined2
   }
   def implDefined2 = _implDefined2
@@ -119,7 +119,7 @@ class Leader {
     * character array representing the entry map
     * convert Array[Byte] into a String??
     */
-  def entryMap_(entryMap: Array[Byte]){
+  def entryMap_(entryMap: Array[Char]){
     _entryMap = entryMap
   }
 
@@ -146,32 +146,33 @@ class Leader {
           recordLength_(Integer.parseInt(s));
         else
           recordLength_(0);
-        recordStatus_(tempLeaderArray(5));
-        typeOfRecord_(tempLeaderArray(6));
-        val s0 = ldr.substring(7,9)
-        implDefined1(s0);
-        charCodingScheme(tempLeaderArray(9));
-        val s1 = tempLeaderArray(10);
+        recordStatus_(tempLeaderArray(5).toChar);
+        typeOfRecord_(tempLeaderArray(6).toChar);
+        val s0 = ldr.substring(7,9).toCharArray
+        implDefined1_(s0);
+        charCodingScheme_(tempLeaderArray(9).toChar);
+        val s1 = tempLeaderArray(10).toString;
         if (isInteger(s1))
-          indicatorCount(Integer.parseInt(s1));
+          indicatorCount_(Integer.parseInt(s1));
         else
-           indicatorCount(2);
-        val s2 = tempLeaderArray(11);
+           indicatorCount_(2);
+        val s2 = tempLeaderArray(11).toString;
         if (isInteger(s2))
-          subfieldCodeLength(Integer.parseInt(s2));
+          subfieldCodeLength_(Integer.parseInt(s2));
         else
-          subfieldCodeLength(2);
-        val s3 = ldr.substring(12, 17);
+          subfieldCodeLength_(2);
+        val s3 = ldr.substring(12, 17).toString;
         if (isInteger(s3))
-          baseAddressOfData(Integer.parseInt(s3));
+          baseAddressOfData_(Integer.parseInt(s3));
         else
-          baseAddressOfData(0);
-        val s4 = ldr.substring(17,20);
-        implDefined2(s4);
-        val s5 = ldr.substring(20,24);
-        entryMap(s5);
-      } catch (NumberFormatException e) {
-         throw new RuntimeException("Unable to parse leader", e);
+          baseAddressOfData_(0);
+        val s4 = ldr.substring(17,20).toCharArray;
+        implDefined2_(s4);
+        val s5 = ldr.substring(20,24).toCharArray;
+        entryMap_(s5);
+      } catch {
+        case e: NumberFormatException => e.printStackTrace()
+          throw e
       }
     }
   }
