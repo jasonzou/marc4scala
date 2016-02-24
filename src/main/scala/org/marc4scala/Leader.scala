@@ -12,13 +12,12 @@ class Leader {
   private var _indicatorCount: Short = 0
   private var _subfieldCodeLength: Short = 0
   private var _baseAddressOfData: Array[Byte] = new Array[Byte](5)
-  private var _implDefined2: Array[Byte] = new Array[Byte](2)
-  private var _entryMap: Array[Byte] = new Array[Byte](Constants.LeaderLength)
+  private var _implDefined2: Array[Byte] = new Array[Byte](3)
+  private var _entryMap: Array[Byte] = new Array[Byte](5)
   private var _leaderArray: Array[Byte] = new Array[Byte](Constants.LeaderLength)
 
   /**
     * Sets the logical record length (positions 00-04).
-    *
     * @param recordLength
     * integer representing the record length
     */
@@ -120,6 +119,7 @@ class Leader {
     *
     * @param entryMap
     * character array representing the entry map
+    * convert Array[Byte] into a String??
     */
   def entryMap_(entryMap: Array[Byte]){
     _entryMap = entryMap
