@@ -122,6 +122,9 @@ class Leader {
   def entryMap_(entryMap: Array[Byte]){
     _entryMap = entryMap
   }
+
+  private def isInteger(str: String) : Boolean = true
+
   def entryMap = _entryMap
   /**
     * Creates a leader object from a string object.
@@ -133,37 +136,40 @@ class Leader {
     * the leader
     */
   def unmarshal(ldr: String){
-    Array[Byte] tempLeaderArray = ldr.getBytes()
-    if (tempLeaderArray.length !== 24){
+    val tempLeaderArray:Array[Byte] = ldr.getBytes()
+    if (tempLeaderArray.length != 24){
       // warning? first 24
     }else{
       try {
-        s = ldr.substring(0, 5);
+        val s = ldr.substring(0, 5);
         if (isInteger(s))
           recordLength_(Integer.parseInt(s));
         else
           recordLength_(0);
         recordStatus_(tempLeaderArray(5));
         typeOfRecord_(tempLeaderArray(6));
-        implDefined1(ldr.substring(7, 9).toCharArray());
-        charCodingScheme(ldr.charAt(9));
-        s = String.valueOf(ldr.charAt(10));
-        if (isInteger(s))
-          setIndicatorCount(Integer.parseInt(s));
+        val s0 = ldr.substring(7,9)
+        implDefined1(s0);
+        charCodingScheme(tempLeaderArray(9));
+        val s1 = tempLeaderArray(10);
+        if (isInteger(s1))
+          indicatorCount(Integer.parseInt(s1));
         else
-           setIndicatorCount(2);
-        s = String.valueOf(ldr.charAt(11));
-        if (isInteger(s))
-          setSubfieldCodeLength(Integer.parseInt(s));
+           indicatorCount(2);
+        val s2 = tempLeaderArray(11);
+        if (isInteger(s2))
+          subfieldCodeLength(Integer.parseInt(s2));
         else
-          setSubfieldCodeLength(2);
-        s = ldr.substring(12, 17);
-        if (isInteger(s))
-          setBaseAddressOfData(Integer.parseInt(s));
+          subfieldCodeLength(2);
+        val s3 = ldr.substring(12, 17);
+        if (isInteger(s3))
+          baseAddressOfData(Integer.parseInt(s3));
         else
-          setBaseAddressOfData(0);
-        setImplDefined2(ldr.substring(17, 20).toCharArray());
-        setEntryMap(ldr.substring(20, 24).toCharArray());
+          baseAddressOfData(0);
+        val s4 = ldr.substring(17,20);
+        implDefined2(s4);
+        val s5 = ldr.substring(20,24);
+        entryMap(s5);
       } catch (NumberFormatException e) {
          throw new RuntimeException("Unable to parse leader", e);
       }
