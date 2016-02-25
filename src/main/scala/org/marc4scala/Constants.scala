@@ -20,6 +20,7 @@ package org.marc4scala
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+import scala.annotation._
 /**
   * Created by jason on 2016-02-19.
   */
@@ -48,6 +49,6 @@ object Constants {
   /** ISO6937 ENCODING **/
   val ISO6937_ENCODING: String = "ISO6937"
 
-  val DirectoryEntryLength: Short = 12
-  val LeaderLength: Short = 24
+  val DirectoryEntryLength: Int = 12
+  val LeaderLength: Int = 24
 }

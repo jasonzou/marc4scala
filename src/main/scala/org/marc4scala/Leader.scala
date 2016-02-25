@@ -1,8 +1,13 @@
 package org.marc4scala
 
 /**
-  * Created by jason on 2/22/16.
-  */
+ * MARC Leader
+ *   based on marc4j
+ *   TODO: there are at least biblio, authority, and holding different
+ *         leaders (some differences)
+ *
+ * Created by jason on 2/22/16.
+ */
 class Leader {
   private var _recordLength: Int = 0
   private var _recordStatus: Char = 0
@@ -137,8 +142,8 @@ class Leader {
     */
   def unmarshal(ldr: String){
     val tempLeaderArray:Array[Byte] = ldr.getBytes()
-    if (tempLeaderArray.length != 24){
-      // warning? first 24
+    if (tempLeaderArray.length != Constants.LeaderLength){
+      // warning? first Constants.LeaderLength
     }else{
       try {
         val s = ldr.substring(0, 5);
@@ -168,8 +173,13 @@ class Leader {
           baseAddressOfData_(0);
         val s4 = ldr.substring(17,20).toCharArray;
         implDefined2_(s4);
-        val s5 = ldr.substring(20,24).toCharArray;
-        entryMap_(s5);
+        val s5 = ldr.substring(20,Constants.LeaderLength).toCharArray;
+        entryMap_(s5)
+
+        var i=0
+        for(i<-0 until Constants.LeaderLength){
+          _leaderArray(i) = tempLeaderArray(i).toByte
+        }
       } catch {
         case e: NumberFormatException => e.printStackTrace()
           throw e
