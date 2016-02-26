@@ -7,6 +7,30 @@ package org.marc4scala
  *         leaders (some differences)
  *
  * Created by jason on 2/22/16.
+ * Leader: Bibliographic Data https://www.loc.gov/marc/bibliographic/ecbdlist.html
+ *         Authority Data https://www.loc.gov/marc/authority/ecadlist.html
+ *         Holding Data https://www.loc.gov/marc/holdings/echdlist.html
+ *         Classification Data https://www.loc.gov/marc/classification/eccdlist.html
+ *         Community Data https://www.loc.gov/marc/community/eccilist.html
+ *   LEADER - Bibliogrpahic Data
+ *   Character Positions
+ *   00-04 - Logical record length
+ *   05 - Record status
+ *   06 - Type of record
+ *   07 - Bibliographic level      
+ *   08 - Type of control
+ *   09 - Character coding scheme
+ *   10 - Indicator count
+ *   11 - Subfield code count
+ *   12-16 - Base address of data
+ *   17 - Encoding level
+ *   18 - Descriptive cataloging form
+ *   19 - Multipart resource record level
+ *   20-23 - Entry map
+ *   20 - Length of the length-of-field portion
+ *   21 - Length of the starting-character-position portion
+ *   22 - Length of the implementation-defined portion
+ *   23 - Undefined Entry map character position 
  */
 class Leader {
   private var _recordLength: Int = 0
@@ -18,7 +42,7 @@ class Leader {
   private var _subfieldCodeLength: Int = 0
   private var _baseAddressOfData: Int = 0
   private var _implDefined2: Array[Char] = new Array[Char](3)
-  private var _entryMap: Array[Char] = new Array[Char](5)
+  private var _entryMap: Array[Char] = new Array[Char](4)
   private var _leaderArray: Array[Byte] = new Array[Byte](Constants.LeaderLength)
 
   /**
