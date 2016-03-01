@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016. <jason.zou@gmail.com>
  *
- * LeaderTest.scala is part of marc4scala.
+ * TagTest.scala is part of marc4scala.
  *
  * marc4scala is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,25 +19,10 @@
  */
 
 package org.marc4scala
-
 import org.scalatest.FlatSpec
+/**
+  * Created by jason on 3/1/16.
+  */
+class TagTest extends FlatSpec {
 
-class LeaderTest extends FlatSpec{
-  val leader = new Leader
-  
-  behavior of "Leader"
-  
-  "Leader" must "unmarshal correctly" in {
-     leader.unmarshal("00714cam a2200205 a 4500")
-     assert("00714cam a2200205 a 4500" == leader.toString)
-     info("unmarshal properly")
-
-     assert(714 == leader.recordLength)
-     info("record length is correct")
-
-     assert('c' == leader.recordStatus)
-     info("record status is correct")
-  }
-
-  it must "marshal correctly" is (pending)
 }
