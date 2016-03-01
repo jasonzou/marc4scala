@@ -2,7 +2,7 @@ import scala.collection.JavaConverters._
 
 name := "marc4scala"
 
-version := "1.0.1"
+version := "1.0.2"
 
 //organization := "org.xstudio"
 
@@ -14,3 +14,5 @@ libraryDependencies ++= Seq(
   "org.scalactic" %% "scalactic" % "2.2.6",
   "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 )
+
+assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false, includeDependency = false)
