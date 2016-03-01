@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016. <jason.zou@gmail.com>
  *
- * ControlField.scala is part of marc4scala.
+ * Record.scala is part of marc4scala.
  *
  * marc4scala is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -21,8 +21,8 @@
 package org.marc4scala
 
 /**
-  * Created by jason on 2016-02-20.
+  * Created by jason on 3/1/16.
   */
-trait ControlField extends VariableField{
+class Record {
 
 }
