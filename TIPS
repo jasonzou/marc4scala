@@ -1,1 +1,3 @@
 sbt sbtVersion
+sbt assemblyPackageScala
+sbt assemblyPackageDependency 
