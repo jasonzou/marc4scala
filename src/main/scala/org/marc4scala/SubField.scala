@@ -19,10 +19,24 @@
  */
 
 package org.marc4scala
-
+import scala.util.matching.Regex
 /**
   * Created by jason on 2016-02-20.
   */
-trait SubField extends VariableField{
+class SubField(val code:Char,val data:String) {
+  override def toString = new String("$"+code+data)
+
+  def isCode(code1:Char):Boolean = (code == code1)
+
+  def find(str:String):Boolean = {
+    var pattern = new Regex(str)
+    val match2 = pattern.findFirstIn(data)
+    var ret = false
+    match2 match{
+      case Some(s) => ret = true
+      case None =>
+    }
+    return ret
+  }
 
 }
