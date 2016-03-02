@@ -9,6 +9,9 @@ version := "1.0.2"
 // set scala version
 scalaVersion := "2.11.7"
 
+// add resolvers
+resolvers += "Artima Maven Repository" at "http://repo.artima.com/releases"
+
 libraryDependencies ++= Seq(
   "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0",
   "org.scalactic" %% "scalactic" % "2.2.6",
