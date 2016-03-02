@@ -24,33 +24,34 @@ import scala.util.matching.Regex
 /**
   * Created by jason on 3/1/16.
   */
-class Tag {
+class Tag(var tag:String) {
   /**
    * This class is for MARC tags.
    */
   private var _buff:Array[Char] = Array('0', '0', '0')
 
-  def this(String str) = {
-    val pattern = new Regex("^[0-9]{3}$")
-    val match1 = pattern.findFirstIn(str)
-    match1 match{
-      case Some(s): _buff = str.toArray
+  val pattern = new Regex("^[0-9]{3}$")
+  setTag(tag)
+
+  def getTag: String = toString
+  def setTag(tag:String){
+    val match2 = pattern.findFirstIn(tag)
+    match2 match{
+      case Some(s) => _buff = tag.toArray
       case None =>
     }
   }
 
-   override toString {
-     var temp:String = new String(_buff)
-     return temp
-   }
+  override def toString =  new String(_buff)
+  
 
-   def isControlTag:Boolean = {
-     if (_buff(0) == '0' && _buff(1) == '0') {
-       return true;
-     } else {
-       return false;
-     }
-   }
+  def isControlTag:Boolean = {
+    if (_buff(0) == '0' && _buff(1) == '0') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-   def isDataTag: Boolean = !isControlTag
+  def isDataTag: Boolean = !isControlTag
 }
