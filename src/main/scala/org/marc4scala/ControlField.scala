@@ -19,10 +19,26 @@
  */
 
 package org.marc4scala
-
+import scala.util.matching.Regex
 /**
   * Created by jason on 2016-02-20.
   */
-trait ControlField extends VariableField{
+class ControlField(val tag:String, val data:String) {
+  val _tag = new Tag(tag)
+  if (_tag.isDataTag) throw new IllegalStateException("Data Tag in a control field")
 
+  def isControlField:Boolean = _tag.isControlTag
+
+  override def toString:String = _tag.toString + " " + data
+
+  def find(str:String):Boolean = {
+    var pattern = new Regex(str)
+    val match2 = pattern.findFirstIn(data)
+    var ret = false
+    match2 match{
+      case Some(s) => ret = true
+      case None =>
+    }
+    return ret
+  }
 }
