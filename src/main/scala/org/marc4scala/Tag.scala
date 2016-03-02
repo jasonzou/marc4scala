@@ -31,8 +31,12 @@ class Tag {
   private var _buff:Array[Char] = Array('0', '0', '0')
 
   def this(String str) = {
-    var test:Boolean;
-    val pattern = new Regex("^[0-9]{3}$");
+    val pattern = new Regex("^[0-9]{3}$")
+    val match1 = pattern.findFirstIn(str)
+    match1 match{
+      case Some(s): _buff = str.toArray
+      case None =>
+    }
   }
 
    override toString {
@@ -40,26 +44,13 @@ class Tag {
      return temp
    }
 
+   def isControlTag:Boolean = {
+     if (_buff(0) == '0' && _buff(1) == '0') {
+       return true;
+     } else {
+       return false;
+     }
+   }
 
-   def isControl = {
-     if (buff[0] == '0' && buff[1] == '0')
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-        }
-
-   def isData = { 
-      if (buff[0] == '0' || buff[1] == '0')
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+   def isDataTag: Boolean = !isControlTag
 }
