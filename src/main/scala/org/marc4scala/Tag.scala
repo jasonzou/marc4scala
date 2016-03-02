@@ -19,54 +19,30 @@
  */
 
 package org.marc4scala
+import scala.util.matching.Regex
 
 /**
   * Created by jason on 3/1/16.
   */
 class Tag {
-        /// <summary>
-        /// This class is for MARC tags.
-        /// </summary>
-        
-        private char[] buff = new char[3] { '0', '0', '0' };
-        public string _warn;
+  /**
+   * This class is for MARC tags.
+   */
+  private var _buff:Array[Char] = Array('0', '0', '0')
 
-        public MARCTag(string str)
-        {
-            bool test;
+  def this(String str) = {
+    var test:Boolean;
+    val pattern = new Regex("^[0-9]{3}$");
+  }
 
-            test = Regex.IsMatch(str, "^[0-9A-Z]{3}$");
-            test |= Regex.IsMatch(str, "^[0-9a-z]{3}$");
-            if (test)
-            {
-                str.CopyTo(0, buff, 0, 3);
-            }
-            else
-            {
-                _warn = "Invalid Tagno";
-            }
-        }
+   override toString {
+     var temp:String = new String(_buff)
+     return temp
+   }
 
-        public string tagStr
-        {
-            get
-            {
-                string temp;
-                temp = new String(buff);
-                return temp;
-            }
 
-        }
-
-        public bool isControl()
-        {
-            if (_warn != null)
-            {
-                return false;
-            }
-            else
-            {
-                if (buff[0] == '0' && buff[1] == '0')
+   def isControl = {
+     if (buff[0] == '0' && buff[1] == '0')
                 {
                     return true;
                 }
@@ -74,12 +50,10 @@ class Tag {
                 {
                     return false;
                 }
-            }
         }
 
-        public bool isData()
-        {
-            if (buff[0] == '0' || buff[1] == '0')
+   def isData = { 
+      if (buff[0] == '0' || buff[1] == '0')
             {
                 return false;
             }
