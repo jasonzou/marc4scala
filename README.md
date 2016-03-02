@@ -1,6 +1,5 @@
 # marc4scala
-MARC for Scala 
+MARC for Scala [![Build Status](https://travis-ci.org/jasonzou/marc4scala.svg?branch=master)](https://travis-ci.org/jasonzou/marc4scala)
 
 
-# Travis CI Status
-[![Build Status](https://travis-ci.org/jasonzou/marc4scala.svg?branch=master)](https://travis-ci.org/jasonzou/marc4scala)
+
