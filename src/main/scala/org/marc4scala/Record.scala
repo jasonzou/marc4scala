@@ -23,11 +23,19 @@ package org.marc4scala
 /**
   * Created by jason on 3/1/16.
   */
-class Record (var leader:Leader, var controlFields:List[ControlField], var dataFields:List[DataField]) {
-  private var _recordType: String = new String("recordType")
+class Record(var leader:Leader, var controlFields:List[ControlField],
+              var dataFields:List[DataField]) {
+  var _recordType: String = new String("recordType")
 
-  private var _recordDirectory: RecordDirectory = new RecordDirectory()
+  var _fieldsEntries:List[RecordDirectoryEntry] = List[RecordDirectoryEntry]()
+  // TODO sort fields, and put into recordDirectoryEntry
+  // add compare method in RecordDirectoryEntry
 
+  var _recordDirectory: RecordDirectory = new RecordDirectory(_fieldsEntries)
+
+  def this(leader:Leader) = {
+    this(leader, List[ControlField](), List[DataField]())
+  }
   def recordType = _recordType
   def recordType_(recordType:String) {
     _recordType = recordType

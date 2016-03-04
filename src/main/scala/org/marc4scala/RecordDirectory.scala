@@ -23,6 +23,33 @@ package org.marc4scala
 /**
   * Created by jason on 3/4/16.
   */
-class RecordDirectory {
+class RecordDirectory(val recordEntries:List[RecordDirectoryEntry]) {
+  private var _recordDirectory:List[RecordDirectoryEntry] = recordEntries
+  private var _entries:Int = _recordDirectory.length
+  private var _recordLength:Int = 0 //TODO
+  private var _baseAddress:Int = 0 //TODO
+  private var _buff:Array[Byte] = new Array[Byte](Constants.DirectoryEntryLength * _recordDirectory.length + 1)
+
+  var i = 0
+  for(entry <- _recordDirectory){
+    Array.copy(entry, 0, _buff, i*_recordDirectory.length, _recordDirectory.length)
+    i += 1
+  }
+  _buff(_buff.length - 1) = Constants.FieldTerminator
+
+  def numOfEntries = _entries
+  def entries:List[RecordDirectoryEntry] = _recordDirectory
+  def asRaw:Array[Byte] = _buff
+
+  def baseAddress = _baseAddress
+  def recordLength = _recordLength
+  def length = Constants.DirectoryEntryLength * _recordDirectory.length + 1
+  def fieldsLength:Int = {
+    var i = 0
+    for(entry <- _recordDirectory){
+      i += entry.lengthOfField
+    }
+    return i
+  }
 
 }
