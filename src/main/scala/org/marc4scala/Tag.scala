@@ -23,26 +23,27 @@ import scala.util.matching.Regex
 
 /**
   * Created by jason on 3/1/16.
+  * TODO convert to trait???
   */
-class Tag(var tag:String) {
+class Tag(val tag:String) {
   /**
    * This class is for MARC tags.
    */
   private var _buff:Array[Char] = Array('0', '0', '0')
 
   val pattern = new Regex("^[0-9]{3}$")
-  setTag(tag)
 
-  def getTag: String = toString
-  def setTag(tag:String){
-    val match2 = pattern.findFirstIn(tag)
-    match2 match{
-      case Some(s) => _buff = tag.toArray
-      case None =>
-    }
+  val match2 = pattern.findFirstIn(tag)
+  match2 match{
+    case Some(s) => _buff = tag.toArray
+    case None =>
   }
 
-  override def toString =  new String(_buff)
+  private var _tag:String = _buff.mkString
+
+  def getTag: String = _tag
+
+  override def toString = _tag
   
 
   def isControlTag:Boolean = {
@@ -54,4 +55,6 @@ class Tag(var tag:String) {
   }
 
   def isDataTag: Boolean = !isControlTag
+
+  def compareTo(str:String):Boolean = {_tag>= str}
 }

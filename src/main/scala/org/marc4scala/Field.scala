@@ -22,6 +22,10 @@ package org.marc4scala
 /**
   * Created by jason on 3/1/16.
   */
-class Field {
+class Field(val tag:String){
+  protected val _tag:Tag = new Tag(tag)
 
+  def fieldTag:Tag = _tag
+
+  def compareTo(obj:Field):Boolean = _tag.compareTo(obj.fieldTag.getTag)
 }

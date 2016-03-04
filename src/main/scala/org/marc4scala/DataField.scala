@@ -23,10 +23,10 @@ import scala.util.matching.Regex
 /**
   * Created by jason on 2016-02-20.
   */
-class DataField (val tag:String, val indicator1:Char, val indicator2:Char,
-                val subfields:List[SubField]) {
+class DataField (override val tag:String, val indicator1:Char, val indicator2:Char,
+                val subfields:List[SubField]) extends Field(tag) {
   private var _subfields:List[SubField] = subfields
-  val _tag:Tag = new Tag(tag)
+
   if (_tag.isControlTag) throw new IllegalStateException("Control Tag in a data field")
 
 

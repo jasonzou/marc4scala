@@ -25,8 +25,8 @@ import scala.util.matching.Regex
   * Created by jason on 2016-02-20.
   */
 
-class ControlField(val tag:String, val data:String) {
-  val _tag = new Tag(tag)
+class ControlField(override val tag:String, val data:String) extends Field(tag){
+  //val _tag = fieldTag
   if (_tag.isDataTag) throw new IllegalStateException("Data Tag in a control field")
 
   def isControlField:Boolean = _tag.isControlTag

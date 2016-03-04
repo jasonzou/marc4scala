@@ -34,7 +34,7 @@ class ControlFieldTest extends FlatSpec{
     assert("008 Raccoons and ripe corn / " == controlField_008.toString)
     assert("002 Jim Arnosky." == controlField_002.toString)
     info("toString properly")
-
+    info(controlField_008.fieldTag.getTag)
   }
 
   it should "throw an exception" in {
