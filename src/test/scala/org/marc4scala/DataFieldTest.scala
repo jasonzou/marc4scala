@@ -21,6 +21,7 @@
 package org.marc4scala
 
 import org.scalatest.FlatSpec
+import java.util.regex.PatternSyntaxException
 /**
   * Created by jason on 3/3/16.
   */
@@ -150,41 +151,20 @@ class DataFieldTest extends FlatSpec{
     assert('a' ==  sList8(0).code);
     assert('h' ==  sList8(1).code);
     assert('h' ==  sList8(2).code);
+
+    val df_thrown = intercept[Exception] {
+      val sList9:List[SubField] = df.getSubFieldsByStr("[c-a]")
+    }
+    info(df_thrown.getMessage)
+
+    val df_thrown1 = intercept[PatternSyntaxException] {
+      val sList10: List[SubField] = df.getSubFieldsByStr("[abc")
+   }
+    info(df_thrown1.getMessage)
   }
 }
 
 /*
-  @Test
-  public void testGetSubFieldsWithBadSubFieldSpec1() {
-    DataField df = factory.newDataField("245", '0' ==  '4');
-    SubField sf1 = factory.newSubField('a' ==  "The summer-land ");
-    SubField sf2 = factory.newSubField('h' ==  "[electronic resource] : ");
-    SubField sf3 = factory.newSubField('b' ==  "a southern story / ");
-    SubField sf4 = factory.newSubField('c' ==  "by a child of the sun.");
-    df.addSubField(sf1);
-    df.addSubField(sf2);
-    df.addSubField(sf3);
-    df.addSubField(sf4);
-
-    exception.expect(PatternSyntaxException.class);
-    df.getSubFields("[c-a]");
-  }
-
-  @Test
-  public void testGetSubFieldsWithBadSubFieldSpec2() {
-    DataField df = factory.newDataField("245", '0' ==  '4');
-    SubField sf1 = factory.newSubField('a' ==  "The summer-land ");
-    SubField sf2 = factory.newSubField('h' ==  "[electronic resource] : ");
-    SubField sf3 = factory.newSubField('b' ==  "a southern story / ");
-    SubField sf4 = factory.newSubField('c' ==  "by a child of the sun.");
-    df.addSubField(sf1);
-    df.addSubField(sf2);
-    df.addSubField(sf3);
-    df.addSubField(sf4);
-
-    exception.expect(PatternSyntaxException.class);
-    df.getSubFields("[abc");
-  }
 
   @Test
   public void testComparable() throws Exception {

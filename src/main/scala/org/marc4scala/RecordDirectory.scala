@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016. <jason.zou@gmail.com>
  *
- * Record.scala is part of marc4scala.
+ * RecordDirectory.scala is part of marc4scala.
  *
  * marc4scala is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -21,15 +21,8 @@
 package org.marc4scala
 
 /**
-  * Created by jason on 3/1/16.
+  * Created by jason on 3/4/16.
   */
-class Record (var leader:Leader, var controlFields:List[ControlField], var dataFields:List[DataField]) {
-  private var _recordType: String = new String("recordType")
+class RecordDirectory {
 
-  private var _recordDirectory: RecordDirectory = new RecordDirectory()
-
-  def recordType = _recordType
-  def recordType_(recordType:String) {
-    _recordType = recordType
-  }
 }
