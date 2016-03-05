@@ -28,4 +28,5 @@ class Field(val tag:String){
   def fieldTag:Tag = _tag
 
   def compareTo(obj:Field):Boolean = _tag.compareTo(obj.fieldTag.getTag)
+
 }

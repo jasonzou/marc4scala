@@ -26,6 +26,19 @@ import scala.util.matching.Regex
 class DataField (override val tag:String, val indicator1:Char, val indicator2:Char,
                 val subfields:List[SubField]) extends Field(tag) {
   private var _subfields:List[SubField] = subfields
+  private var _fieldLength:Int = 2
+  for(sf <- _subfields){
+    _fieldLength += sf.length
+  }
+  private var _buff:Array[Byte] = new Array[Byte](_fieldLength)
+
+  private var i:Int = 2
+  _buff(0) = indicator1.toByte
+  _buff(1) = indicator2.toByte
+  for(sf <- _subfields){
+    Array.copy(sf.asRaw,0,_buff,i,sf.length)
+    i = i + sf.length + 1
+  }
 
   if (_tag.isControlTag) throw new IllegalStateException("Control Tag in a data field")
 

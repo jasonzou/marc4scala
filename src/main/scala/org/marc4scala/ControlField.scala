@@ -26,6 +26,13 @@ import scala.util.matching.Regex
   */
 
 class ControlField(override val tag:String, val data:String) extends Field(tag){
+  private var _buff:Array[Byte] = new Array[Byte](data.length)
+
+  private var i:Int = 0
+  for(c<-data.toCharArray){
+    _buff(i) = c.toByte
+    i += 1
+  }
   //val _tag = fieldTag
   if (_tag.isDataTag) throw new IllegalStateException("Data Tag in a control field")
 
@@ -43,4 +50,7 @@ class ControlField(override val tag:String, val data:String) extends Field(tag){
     }
     return ret
   }
+
+  def asRaw:Array[Byte] = _buff
+
 }

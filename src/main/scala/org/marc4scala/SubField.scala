@@ -25,7 +25,15 @@ import scala.util.matching.Regex
   */
 class SubField(val code:Char,val data:String) {
   override def toString = new String("$"+code+data)
+  private var _buff:Array[Byte] = new Array[Byte](data.length + 2)
 
+  _buff(0) = Constants.SubfieldDelimiter
+  _buff(1) = code.toByte
+  var i:Int = 2
+  for(c<-data){
+    _buff(i) = c.toByte
+    i += 1
+  }
   def isCode(code1:Char):Boolean = (code == code1)
 
   def find(str:String):Boolean = {
@@ -39,4 +47,6 @@ class SubField(val code:Char,val data:String) {
     return ret
   }
 
+  def length:Int = 2+data.length
+  def asRaw:Array[Byte] = _buff
 }

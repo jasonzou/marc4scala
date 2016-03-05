@@ -25,4 +25,18 @@ import org.scalatest.FlatSpec
   */
 class RecordTest extends FlatSpec {
 
+  it must "create a record properly" in {
+    val leader: Leader = new Leader()
+    leader.unmarshal("00000cam a2200000 a 4500")
+
+    val cf: ControlField = new ControlField("001", "12883376")
+
+    val df: DataField = new DataField("245", '1', '0')
+    df.addSubField(new SubField('a', "Summerland /"))
+    df.addSubField(new SubField('c', "Michael Chabon."))
+
+    val record: Record = new Record(leader, List(cf), List(df))
+    info(record.toString)
+  }
+
 }

@@ -239,4 +239,6 @@ class Leader {
   def marshal: String = new String(_leaderArray)
   override def toString: String = new String(_leaderArray)
 
+  def asRaw:Array[Byte] = _leaderArray
+
 }
