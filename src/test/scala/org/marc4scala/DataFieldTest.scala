@@ -162,18 +162,31 @@ class DataFieldTest extends FlatSpec{
    }
     info(df_thrown1.getMessage)
   }
+
+  it must "return bytes properly before and after we update a datafield" in {
+    val df: DataField = new DataField("245", '0',  '4',  List(new SubField('a', "The summer-land")))
+    val sf1: SubField = new SubField('h',  "[electronic resource] : ")
+    val sf2: SubField = new SubField('c', "Michael Chabon")
+    val sf3: SubField = new SubField('h',  "3[electronic resource] : ")
+    val sf4: SubField = new SubField('b',  "a southern story / ")
+
+    info("before we add any subfields")
+    var df01:Array[Byte] =  "245049aThe summer-land".getBytes()
+    df01(5) = Constants.SubfieldDelimiter
+    assert(df.asRaw === df01)
+    df addSubField(sf1)
+    info(df.toString)
+    df.addSubField(sf2)
+    df.addSubField(sf3)
+    df.addSubField(sf4)
+    assert(5 == df.subfields_.length)
+    info(df.toString)
+    var sfs:List[SubField] = df.getSubFieldsByStr("[a-d]")
+    info(sfs.length.toString)
+    for(sf <- sfs){ info(sf.toString) }
+    sfs = df.getSubFieldsByCode('h')
+    for(sf <- sfs){ info(sf.toString) }
+
+  }
 }
 
-/*
-
-  @Test
-  public void testComparable() throws Exception {
-    DataField df1 = factory.newDataField("600", '0' ==  '0');
-    DataField df2 = factory.newDataField("600", '0' ==  '0');
-    assert(0, df1.compareTo(df2));
-    df2.setTag("245");
-    assert(4, df1.compareTo(df2));
-    df2.setTag("700");
-    assert(-1, df1.compareTo(df2));
-  }
-*/

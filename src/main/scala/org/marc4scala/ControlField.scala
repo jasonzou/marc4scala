@@ -36,6 +36,14 @@ class ControlField(override val tag:String, val data:String) extends Field(tag){
   //val _tag = fieldTag
   if (_tag.isDataTag) throw new IllegalStateException("Data Tag in a control field")
 
+  private def _update {
+    var i:Int = 0
+    for(c<-data.toCharArray) {
+      _buff(i) = c.toByte
+      i += 1
+    }
+  }
+
   def isControlField:Boolean = _tag.isControlTag
 
   override def toString:String = _tag.toString + " " + data
@@ -51,6 +59,18 @@ class ControlField(override val tag:String, val data:String) extends Field(tag){
     return ret
   }
 
-  def asRaw:Array[Byte] = _buff
+  def asRaw:Array[Byte] = {
+    var temp:Array[Byte] = new Array[Byte](3+data.length)
+    var i:Int = 0
+    for(c<-_tag.toString.toCharArray){
+      temp(i) = c.toByte
+      i = i + 1
+    }
+    Array.copy(_buff,0, temp, 3, data.length)
+    return temp
+  }
+
+  def dataLength:Int = _buff.length
+  def length:Int = dataLength + 3
 
 }

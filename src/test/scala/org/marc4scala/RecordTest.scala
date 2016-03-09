@@ -20,6 +20,8 @@
 
 package org.marc4scala
 import org.scalatest.FlatSpec
+import java.io._
+
 /**
   * Created by jason on 3/1/16.
   */
@@ -37,6 +39,22 @@ class RecordTest extends FlatSpec {
 
     val record: Record = new Record(leader, List(cf), List(df))
     info(record.toString)
+
+    var out = None: Option[FileOutputStream]
+
+    try {
+
+      out = Some(new FileOutputStream("/Users/jason/Test.mrc"))
+      for(c<- record.asRaw) {
+        out.get.write(c)
+      }
+    } catch {
+      case e: IOException => e.printStackTrace
+    } finally {
+      info("entered finally ...")
+      if (out.isDefined) out.get.close
+    }
+
   }
 
 }

@@ -63,4 +63,15 @@ class ControlFieldTest extends FlatSpec{
     info("find strings Okay")
   }
 
+  it must "yield into bytes properly" in {
+    val test1:Array[Byte] = new Array[Byte](controlField_002.length)
+    Array.copy(controlField_002.asRaw, 0, test1, 0, test1.length)
+    assert("002Jim Arnosky." == new String(test1.takeWhile(_!=0), "UTF-8"))
+
+  }
+
+  it must "return dataLength properly" is (pending)
+
+  it must "return length properly" is (pending)
+
 }

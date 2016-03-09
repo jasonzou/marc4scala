@@ -33,7 +33,7 @@ class Record(var leader:Leader, var controlFields:List[ControlField],
   var temp:List[ControlField] = controlFields.sortWith(_.fieldTag.getTag > _.fieldTag.getTag)
 
   var previous:Int = 0
-  for(cf <- controlFields){
+  for(cf <- temp){
     var tempRecDirEntry:RecordDirectoryEntry = new RecordDirectoryEntry(cf.tag, cf.data.length,previous)
     previous += cf.data.length
     _fieldsEntries = _fieldsEntries ::: List(tempRecDirEntry)
@@ -41,7 +41,7 @@ class Record(var leader:Leader, var controlFields:List[ControlField],
 
   var temp1:List[DataField] = dataFields.sortWith(_.fieldTag.getTag > _.fieldTag.getTag)
 
-  for(df <- dataFields){
+  for(df <- temp1){
     var subfieldsLen:Int = 0
     for(subfield <- df.subfields){
       subfieldsLen += 1 + subfield.data.length
@@ -57,7 +57,16 @@ class Record(var leader:Leader, var controlFields:List[ControlField],
 
   Array.copy(leader.asRaw,0, _buff,0,Constants.LeaderLength)
   Array.copy(_recordDirectory.asRaw,0,_buff,Constants.LeaderLength,_recordDirectory.length)
+  var i:Int = 0
+  for(cf<-temp){
+    Array.copy(cf.asRaw,0, _buff, Constants.LeaderLength+_recordDirectory.length+i, cf.asRaw.length)
+    i+= cf.asRaw.length
+  }
 
+  for(df<-temp1){
+    Array.copy(df.asRaw,0, _buff, Constants.LeaderLength+_recordDirectory.length+i, df.asRaw.length)
+    i+= df.asRaw.length
+  }
 
   def this(leader:Leader) = {
     this(leader, List[ControlField](), List[DataField]())

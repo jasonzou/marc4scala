@@ -37,7 +37,7 @@ class DataField (override val tag:String, val indicator1:Char, val indicator2:Ch
   _buff(1) = indicator2.toByte
   for(sf <- _subfields){
     Array.copy(sf.asRaw,0,_buff,i,sf.length)
-    i = i + sf.length + 1
+    i = i + sf.length
   }
 
   if (_tag.isControlTag) throw new IllegalStateException("Control Tag in a data field")
@@ -46,8 +46,36 @@ class DataField (override val tag:String, val indicator1:Char, val indicator2:Ch
   def this(tag:String, indicator1:Char, indicator2:Char) =
     this(tag, indicator1, indicator2, List())
 
+  def asRaw:Array[Byte]={
+    var temp:Array[Byte] = new Array[Byte](5+_fieldLength)
+    var i:Int = 0
+    for(c<-_tag.toString.toCharArray){
+      temp(i) = c.toByte
+      i = i + 1
+    }
+    temp(3) = indicator1.toByte
+    temp(4) = indicator2.toByte
+    Array.copy(_buff,0, temp, 5, _fieldLength)
+    return temp
+  }
+
+  private def _update: Unit ={
+    _fieldLength = 2
+    for(sf <- _subfields){
+      _fieldLength += sf.length
+    }
+    _buff = new Array[Byte](_fieldLength)
+
+    var i:Int = 0
+    for(sf <- _subfields){
+      Array.copy(sf.asRaw, 0, _buff, i, sf.length)
+      i = i + sf.length
+    }
+  }
+
   def addSubField(subfield:SubField){
     _subfields = _subfields ::: List(subfield)
+    _update
   }
 
   def _remove(i:SubField, li:List[SubField]):List[SubField] = {
@@ -66,6 +94,7 @@ class DataField (override val tag:String, val indicator1:Char, val indicator2:Ch
     if (originalLength == _subfields.length){
       return false
     }
+    _update
     return true
   }
 

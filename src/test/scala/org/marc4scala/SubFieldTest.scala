@@ -53,4 +53,16 @@ class SubFieldTest extends FlatSpec{
     assert(subfield_c.find("Arnosky.") == true)
     info("find strings Okay")
   }
+
+  it must "convert to asRaw properly" in {
+    assert(subfield_a.asRaw(0) == Constants.SubfieldDelimiter)
+    val test:Array[Byte] = new Array[Byte](subfield_a.asRaw.length - 1)
+    Array.copy(subfield_a.asRaw,1, test, 0, test.length)
+    assert(new String(test.takeWhile(_ != 0), "UTF-8") === "aRaccoons and ripe corn / ")
+
+    val test1:Array[Byte] = new Array[Byte](subfield_c.length - 2)
+    assert('c' == subfield_c.asRaw(1))
+    Array.copy(subfield_c.asRaw, 2, test1, 0, test1.length)
+    assert("Jim Arnosky." == new String(test1.takeWhile(_!=0), "UTF-8"))
+  }
 }
